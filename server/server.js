@@ -3,7 +3,9 @@ const helmet = require("helmet");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const config = require("./utils/config");
-const userRouter = require("./routes/user.routes");
+const cookieParser = require("cookie-parser");
+
+const app = express();
 
 mongoose
   .connect(config.MONGODB_URL, {
@@ -11,16 +13,19 @@ mongoose
     useUnifiedTopology: true,
     useCreateIndex: true,
   })
-  .then(() => console.log("connected to database"))
+  .then(() => console.log("Database connected..."))
   .catch((error) => console.log("error:", error));
 
-const app = express();
-
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 app.use(helmet());
+
+const userRouter = require("./routes/user.routes");
 app.use("/api/users", userRouter);
-app.use("/users", userRouter);
+
+const authRouter = require("./routes/auth.routes");
+app.use("/api/auth", authRouter);
 
 app.listen(config.PORT, () => {
   console.log(`Server is listening on port ${config.PORT}`);

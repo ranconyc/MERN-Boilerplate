@@ -1,6 +1,8 @@
-const userRouter = require("express").Router();
+const express = require("express");
+const router = express.Router();
+
 const UserController = require("../controllers/user.controller");
 
-userRouter.route("/seed").get(UserController.seedUsers);
+router.route("/seed").get(UserController.seedUsers);
 
-module.exports = userRouter;
+module.exports = router;

@@ -1,26 +1,18 @@
-const User = require("../models/user");
+const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
-const register = async (req, res) => {
-  const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8),
-  });
-
-  const createUser = await user.save();
-  res.send({
-    _id: createdUser._id,
-    name: createdUser.name,
-    email: createdUser.email,
-    isAdmin: createdUser.isAdmin,
-    token: generateToken(createdUser),
-  });
+const login = async (req, res) => {
+  res.send("login");
+};
+const register = (req, res) => {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) {
+    res.status(400).send({ mag: "Please fill in all field" });
+  }
+  res.send(req.body);
 };
 
-const login = async (req, res) => {};
-
 module.exports = {
+  login,
   register,
-  createUser,
 };
