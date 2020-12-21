@@ -1,7 +1,7 @@
 {
-  "name": "MERN_Boilerplate",
+  "name": "mern-boilerplate",
   "version": "1.0.0",
-  "description": "MERN_Boilerplate",
+  "description": "mern-boilerplate",
   "main": "server.js",
   "scripts": {
     "start": "node server/server.js",
